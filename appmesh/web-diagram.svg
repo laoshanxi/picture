@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#606266"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="820" fill="#ffffff"/>
+
+  <!-- User -->
+  <g>
+    <circle cx="600" cy="52" r="16" fill="#ffffff" stroke="#303133" stroke-width="2.5"/>
+    <path d="M 572 108 a 28 24 0 0 1 56 0 z" fill="#ffffff" stroke="#303133" stroke-width="2.5"/>
+    <text x="600" y="132" text-anchor="middle" font-size="16" fill="#303133">User (Browser)</text>
+  </g>
+
+  <!-- User -> Web UI -->
+  <line x1="600" y1="142" x2="600" y2="176" stroke="#606266" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="614" y="166" font-size="14" fill="#909399">HTTPS :443</text>
+
+  <!-- Web UI container -->
+  <g filter="url(#shadow)">
+    <rect x="270" y="180" width="660" height="260" rx="12" fill="#EAF3FC" stroke="#3A8EE6" stroke-width="2"/>
+  </g>
+  <text x="292" y="210" font-size="17" font-weight="bold" fill="#1f5f9e">App Mesh Web UI · nginx · Docker</text>
+
+  <!-- SPA -->
+  <g filter="url(#shadow)">
+    <rect x="300" y="226" width="600" height="48" rx="8" fill="#ffffff" stroke="#3A8EE6" stroke-width="1.5"/>
+  </g>
+  <text x="600" y="255" text-anchor="middle" font-size="15" fill="#303133">Vue.js SPA (static files)</text>
+
+  <!-- proxy routes -->
+  <g filter="url(#shadow)">
+    <rect x="300" y="296" width="184" height="64" rx="8" fill="#D6E9FA" stroke="#3A8EE6" stroke-width="1.5"/>
+    <rect x="508" y="296" width="184" height="64" rx="8" fill="#D6E9FA" stroke="#3A8EE6" stroke-width="1.5"/>
+    <rect x="716" y="296" width="184" height="64" rx="8" fill="#D6E9FA" stroke="#3A8EE6" stroke-width="1.5"/>
+  </g>
+  <text x="392" y="322" text-anchor="middle" font-size="15" font-weight="bold" fill="#1f5f9e">/appmesh/*</text>
+  <text x="392" y="344" text-anchor="middle" font-size="13" fill="#606266">REST proxy</text>
+  <text x="600" y="322" text-anchor="middle" font-size="15" font-weight="bold" fill="#1f5f9e">/auth/*</text>
+  <text x="600" y="344" text-anchor="middle" font-size="13" fill="#606266">OIDC proxy</text>
+  <text x="808" y="322" text-anchor="middle" font-size="15" font-weight="bold" fill="#1f5f9e">/dexuser/*</text>
+  <text x="808" y="344" text-anchor="middle" font-size="13" fill="#606266">Admin proxy</text>
+
+  <!-- env note -->
+  <text x="600" y="396" text-anchor="middle" font-size="13" fill="#909399">Upstreams set by env: APP_MESH_API_URL · APP_MESH_AUTH_URL · APP_MESH_ADMIN_UI_URL</text>
+  <text x="600" y="420" text-anchor="middle" font-size="13" fill="#909399">One exposed port (443) — static site and API share the same origin</text>
+
+  <!-- proxy -> targets arrows -->
+  <line x1="392" y1="360" x2="392" y2="516" stroke="#606266" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="600" y1="360" x2="600" y2="516" stroke="#606266" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="808" y1="360" x2="808" y2="516" stroke="#606266" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- targets -->
+  <g filter="url(#shadow)">
+    <rect x="292" y="520" width="200" height="86" rx="10" fill="#E8F6EC" stroke="#52A96C" stroke-width="2"/>
+    <rect x="500" y="520" width="200" height="86" rx="10" fill="#F3EAFB" stroke="#8E6BB8" stroke-width="2"/>
+    <rect x="708" y="520" width="200" height="86" rx="10" fill="#FDF0E4" stroke="#E89A3C" stroke-width="2"/>
+  </g>
+  <text x="392" y="550" text-anchor="middle" font-size="16" font-weight="bold" fill="#2f7a4a">App Mesh Daemon</text>
+  <text x="392" y="572" text-anchor="middle" font-size="13" fill="#606266">REST API :6060 (TLS)</text>
+  <text x="392" y="592" text-anchor="middle" font-size="13" fill="#606266">app lifecycle · files · shell</text>
+
+  <text x="600" y="550" text-anchor="middle" font-size="16" font-weight="bold" fill="#6a4a94">Dex</text>
+  <text x="600" y="572" text-anchor="middle" font-size="13" fill="#606266">OIDC issuer :6062</text>
+  <text x="600" y="592" text-anchor="middle" font-size="13" fill="#606266">login · token · RBAC identity</text>
+
+  <text x="808" y="550" text-anchor="middle" font-size="16" font-weight="bold" fill="#b06f1e">User Admin UI</text>
+  <text x="808" y="572" text-anchor="middle" font-size="13" fill="#606266">dexuser :6064</text>
+  <text x="808" y="592" text-anchor="middle" font-size="13" fill="#606266">manage login accounts</text>
+
+  <!-- daemon children -->
+  <line x1="342" y1="606" x2="342" y2="694" stroke="#606266" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="442" y1="606" x2="442" y2="694" stroke="#606266" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="232" y="700" width="220" height="76" rx="10" fill="#F5F7FA" stroke="#909399" stroke-width="1.5"/>
+    <rect x="552" y="700" width="220" height="76" rx="10" fill="#F5F7FA" stroke="#909399" stroke-width="1.5"/>
+  </g>
+  <text x="342" y="730" text-anchor="middle" font-size="15" font-weight="bold" fill="#303133">Managed Apps</text>
+  <text x="342" y="752" text-anchor="middle" font-size="13" fill="#606266">process · Docker container</text>
+
+  <!-- forward arrow from daemon to peer nodes (routes below the target row) -->
+  <path d="M 470 606 L 470 652 L 662 652 L 662 694" fill="none" stroke="#606266" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+  <text x="575" y="644" font-size="13" fill="#909399">Forward</text>
+
+  <text x="662" y="730" text-anchor="middle" font-size="15" font-weight="bold" fill="#303133">Peer Nodes</text>
+  <text x="662" y="752" text-anchor="middle" font-size="13" fill="#606266">cluster · same bearer token</text>
+</svg>
